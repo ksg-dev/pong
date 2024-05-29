@@ -1,4 +1,5 @@
 from turtle import Turtle
+import random
 
 
 class Ball(Turtle):
@@ -7,8 +8,23 @@ class Ball(Turtle):
         self.shape("circle")
         self.color("white")
         self.penup()
-        self.start()
-        self.setheading(45)
+        # use move attributes so we can reverse them for bounce
+        self.x_move = 10
+        self.y_move = 10
 
-    def start(self):
-        self.forward(20)
+    def move(self):
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
+        self.goto(new_x, new_y)
+
+    def bounce_y(self):
+        # reverse y when hits top or bottom
+        self.y_move *= -1
+
+    def bounce_x(self):
+        # reverse x when hits paddle
+        self.x_move *= -1
+
+    def restart(self):
+        self.home()
+        self.bounce_x()
