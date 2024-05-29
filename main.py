@@ -26,10 +26,12 @@ screen.onkey(r_paddle.up, "Up")
 screen.onkey(r_paddle.down, "Down")
 
 playing = True
+
 while playing:
     screen.update()
     # Pause between movements so ball isn't as fast
-    time.sleep(0.1)
+    time.sleep(ball.move_speed)
+
     ball.move()
 
     # Detect collision w wall
@@ -42,15 +44,14 @@ while playing:
         ball.bounce_x()
 
     # Detect if right paddle misses
-    if ball.xcor() > 375:
+    if ball.xcor() > 380:
         ball.restart()
         scoreboard.l_point()
 
     # Detect if left paddle misses
-    if ball.xcor() < -375:
+    if ball.xcor() < -380:
         ball.restart()
         scoreboard.r_point()
-
 
 
 screen.exitonclick()

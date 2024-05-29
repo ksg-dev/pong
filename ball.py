@@ -11,6 +11,8 @@ class Ball(Turtle):
         # use move attributes so we can reverse them for bounce
         self.x_move = 10
         self.y_move = 10
+        self.move_speed = 0.1
+
 
     def move(self):
         new_x = self.xcor() + self.x_move
@@ -24,7 +26,10 @@ class Ball(Turtle):
     def bounce_x(self):
         # reverse x when hits paddle
         self.x_move *= -1
+        # increase speed by reducing time sleep
+        self.move_speed *= 0.9
 
     def restart(self):
         self.home()
+        self.move_speed = 0.1
         self.bounce_x()
